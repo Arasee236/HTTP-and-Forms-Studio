@@ -2,10 +2,59 @@
 
 <head>
 	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
 	<script>
 		// TODO: create a handler
-    window.addEventListener("load", function(){
+		
+    function setSearchEngine() {
+      //   window.alert("Hello");
+	 
+	  
+	  	let actions = {
+				"google": "https://www.google.com/search",
+				"duckduckgo": "https://duckduckgo.com",
+				"bing": "https://bing.com/search",
+				"ask": "https://ask.com/web"
+			};
+
+
+			validateUserInput();
+
+    		if(true) {
+        		let form = document.getElementById("searchForm");
+        		let selectedSearchEngine = document.querySelector("input[name=engine]:checked");
+       			let action = actions[selectedSearchEngine.value];
+        		form.setAttribute("action", action);
+    		};
+	}
+
+	function validateUserInput(event) {
+
+		let searchText = document.querySelector("input[name=q]");
+		let selectedSearchEngine = document.querySelector("input[name=engine]:checked");
+
+		if (searchText.value === "") {
+			alert("Please enter your search word or term.");
+			event.preventDefault();
+		}
+		
+		else if (selectedSearchEngine === null) {
+			alert("Please select your choice of search engine.");
+			event.preventDefault();
+		}
+		
+		else {
+			return true;
+		}
+	}	
+      
+	window.addEventListener("load", function(){
+		
         // TODO: register the handler
+
+		let form = document.getElementById("searchForm");
+    	form.addEventListener("submit", setSearchEngine);
+	
     });
 	</script>
 </head>
@@ -14,6 +63,13 @@
 
 	<form id="searchForm">
     <!-- TODO: add form elements -->
-	</form>
-
+	<fieldset>
+		<input id="text-area" type="text" name="q">
+		<label><input type="radio" value="google" name="engine">Google</label>
+		<label><input type="radio" value="duckDuckGo" name="engine">DuckDuckGo</label>
+		<label><input type="radio" value="bing" name="engine">Bing</label>
+		<label><input type="radio" value="ask" name="engine">Ask</label>
+		<input id="submit-button" type="submit" value="Go!"/>
+	</fieldset>
+		
 </body>
